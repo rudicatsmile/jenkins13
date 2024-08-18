@@ -5,20 +5,8 @@ pipeline {
 		stage('Build') {
 			steps {
 				echo 'Build app'
+				sh 'ssh -o StrictHostKeyChecking=no -i root@10.184.0.13 whoami'
 			}
-		}
-	stage('Test') {
-		    steps {
-				echo 'Test app'
-				echo 'test trigger from github'
-				sh 'ssh root@10.184.0.13 whoami'
-			}
-		}
-	stage('Deploy') {
-			steps {
-				echo 'Deploy app'
-			}
-		}
-									
+		}									
 	}
 }
