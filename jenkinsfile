@@ -5,7 +5,7 @@ pipeline {
 		stage('Build') {
 			steps {
 				echo 'Build app'
-				sh 'ssh -o StrictHostKeyChecking=no -i root@10.184.0.13 whoami'
+				sh 'ssh -o StrictHostKeyChecking=no -i rudic@10.184.0.13 whoami'
 			}
 		}									
 	}
