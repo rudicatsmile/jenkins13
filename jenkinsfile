@@ -1,11 +1,14 @@
 pipeline {
     agent any
+	environment {
+		GCP_SSH_KEY = credentials('rsa-jenkins-worker')							
+	}
 
     stages {
 		stage('Backup DB') {
 			steps {
 				echo 'Build app'
-				sh 'ssh -o StrictHostKeyChecking=no -i rudic@10.184.0.13 whoami'
+				sh 'ssh -o StrictHostKeyChecking=no -i "$GCP_SSH_KEY" rudic@10.184.0.13 whoami'
 			}
 		}									
 	}
