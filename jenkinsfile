@@ -8,7 +8,7 @@ pipeline {
 		stage('Backup DB') {
 			steps {
 				echo 'Build app'
-				sh 'ssh -o StrictHostKeyChecking=no -i "$GCP_SSH_KEY" rudic@10.184.0.13 "sudo mysqldump db_customers > backup-db-customers.sql"'
+				sh 'ssh -o StrictHostKeyChecking=no -i "$GCP_SSH_KEY" rudic@10.184.0.13 "sudo mysqldump db_customers > backup-db-customers-${BUILD_NUMBER}.sql"'
 			}
 		}									
 	}
