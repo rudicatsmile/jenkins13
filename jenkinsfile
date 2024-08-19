@@ -2,7 +2,8 @@ pipeline {
     agent any
 	environment {
 		GCP_SSH_KEY = credentials('rsa-jenkins-worker')	
-		GCP_STORAGE_KEY = credentials('gcp_storage_service_account')						
+		GCP_STORAGE_KEY = credentials('gcp_storage_service_account')	
+		DISCORD = credentials('discord_webhook')					
 	}
 
     stages {
@@ -30,5 +31,27 @@ pipeline {
 
 			}
 		}							
+	}
+
+	post {
+		always {
+			echo "post always"
+			discordSend description: "Jenkins backup storage-${BUILD_NUMBER}", footer: "Build always", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "$DISCORD"
+		}
+		success {
+			echo "post success"
+			discordSend description: "Jenkins backup storage-${BUILD_NUMBER}", footer: "Build success", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "$DISCORD"
+
+		}
+		failure {
+			echo "post failure"
+			discordSend description: "Jenkins backup storage-${BUILD_NUMBER}", footer: "Build failure", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "$DISCORD"
+		}
+		aborted {
+			echo "post aborted"
+			discordSend description: "Jenkins backup storage-${BUILD_NUMBER}", footer: "Build aborted", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "$DISCORD"
+			// discordSend description: "Jenkins Pipeline Build", footer: "Build aborted", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/1086868754404741191/9ueMsrq80x0FBDcZIhkib6NKRPvoGA7uSBUXZqHuh9ATytZCGbiYmTjoakfQVxOaZ_7g"
+
+		}
 	}
 }
