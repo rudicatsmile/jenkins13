@@ -18,7 +18,7 @@ pipeline {
 				sh 'scp -o StrictHostKeyChecking=no -i $GCP_SSH_KEY $GCP_STORAGE_KEY rudic@10.184.0.13:~'  //copy json storage to server mariadb
 				sh 'ssh -o StrictHostKeyChecking=no -i $GCP_SSH_KEY rudic@10.184.0.13 "gcloud auth activate-service-account $(cat apt-passage-430503-r9-499297184ac4.json | jq -r .client_email) --key-file=apt-passage-430503-r9-499297184ac4.json"'
 				sh 'ssh -o StrictHostKeyChecking=no -i $GCP_SSH_KEY rudic@10.184.0.13 "gsutil cp backup-db-customers-${BUILD_NUMBER}.sql gs://storage-data-mariadb-rudicatsmile"'
-				//sh 'ssh -o StrictHostKeyChecking=no -i $GCP_SSH_KEY rudic@10.184.0.13 "rm -rf *"'
+				sh 'ssh -o StrictHostKeyChecking=no -i $GCP_SSH_KEY rudic@10.184.0.13 "rm -rf *"'
 
 				// sh 'ssh -o StrictHostKeyChecking=no -i "$GCP_SSH_KEY" rudic@10.184.0.13 "gsutil cp backup-db-customers-${BUILD_NUMBER}.sql gs://storage-data-mariadb-rudicatsmile"'
 			}
