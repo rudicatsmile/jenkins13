@@ -15,7 +15,7 @@ pipeline {
 		stage('Upload to GCS') {
 			steps {
 				echo 'Uploading to GCS ...'
-				sh 'scp -o StrictHostKeyChecking=no -i "$GCP_SSH_KEY" "$GCP_STORAGE_KEY" rudic@34.101.68.104:~'  //copy json storage to server mariadb
+				sh 'scp -o StrictHostKeyChecking=no -i "$GCP_SSH_KEY" "$GCP_STORAGE_KEY" rudic@10.184.0.13:~'  //copy json storage to server mariadb
 
 				sh 'ssh -o StrictHostKeyChecking=no -i "$GCP_SSH_KEY" rudic@10.184.0.13 "gsutil cp backup-db-customers-${BUILD_NUMBER}.sql gs://storage-data-mariadb-rudicatsmile"'
 			}
