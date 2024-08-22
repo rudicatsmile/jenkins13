@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: myapp-core
-          image: <Image>
+          image: nginx:alpine
           resources:
             limits:
               memory: "64Mi"
