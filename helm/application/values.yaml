@@ -1,0 +1,5 @@
+image:
+  name: nginx
+  tag: alpine
+port: 80
+replicas: 3

@@ -1,0 +1,4 @@
+apiVersion: v1
+name: myapplication
+description: Ini chart untuk myapplication
+version: "1.0"
