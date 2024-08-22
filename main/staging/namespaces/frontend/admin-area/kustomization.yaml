@@ -3,5 +3,4 @@ kind: Kustomization
 namespace: frontend
 
 resources:
-  - namespace.yaml
-  - admin-area
+  - secret.yaml
