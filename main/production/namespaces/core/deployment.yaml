@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-core
+spec:
+  selector:
+    matchLabels:
+      app: myapp-core
+  template:
+    metadata:
+      labels:
+        app: myapp-core
+    spec:
+      containers:
+        - name: myapp-core
+          image: <Image>
+          resources:
+            limits:
+              memory: "64Mi"
+              cpu: "50m"
+          ports:
+            - containerPort: 80
